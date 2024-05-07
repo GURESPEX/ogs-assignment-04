@@ -84,7 +84,7 @@ const HomePage = () => {
               variants={{
                 initial: {},
                 animate: {
-                  transition: { staggerChildren: 0.1, ease: [0, 0, 0, 1] },
+                  transition: { staggerChildren: 0.05, ease: [0, 0, 0, 1] },
                 },
               }}
               className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2"
