@@ -8,12 +8,26 @@ import {
   MdNavigateNext,
 } from "react-icons/md";
 import { pokemonTypeColors } from "@/utils/PokemonTypeColors";
+import { animate, motion, useMotionValue, useTransform } from "framer-motion";
+import { useEffect } from "react";
 
 type Props = {
   pokemon: Pokemon | undefined;
 };
 
 const PokemonDetailCard = ({ pokemon }: Props) => {
+  const count = useMotionValue(0);
+  const rounded = useTransform(count, (latest) => Math.round(latest));
+
+  useEffect(() => {
+    const controls = animate(count, pokemon ? pokemon.stats.total : 0, {
+      ease: [0, 0, 0, 1],
+      duration: 0.5,
+    });
+
+    return controls.stop;
+  }, []);
+
   return (
     <div className="col gap-4 rounded-lg overflow-hidden">
       <div className="col items-center gap-2 p-4">
@@ -83,7 +97,7 @@ const PokemonDetailCard = ({ pokemon }: Props) => {
                   </div>
                 </td>
                 <td className="p-0 align-top">
-                  <div className="row items-start gap-2 p-2 flex-wrap font-semibold">
+                  <div className="row items-start gap-2 p-2 flex-wrap font-semibold capitalize">
                     {pokemon?.name}
                   </div>
                 </td>
@@ -95,7 +109,7 @@ const PokemonDetailCard = ({ pokemon }: Props) => {
                   </div>
                 </td>
                 <td className="p-0 align-top">
-                  <div className="row items-start gap-2 p-2 flex-wrap font-semibold">
+                  <div className="row items-start gap-2 p-2 flex-wrap font-semibold capitalize">
                     {pokemon?.species}
                   </div>
                 </td>
@@ -185,20 +199,27 @@ const PokemonDetailCard = ({ pokemon }: Props) => {
           </h2>
           <div className="col p-4 gap-4 h-full">
             <div className="row justify-center items-center h-full">
-              <div
-                style={{
-                  boxShadow: "0 -16px 32px #0003 inset",
-                  background:
-                    pokemonTypeColors[pokemon?.type[0] as PokemonType][0],
-                }}
-                className="relative w-48 aspect-square bg-slate-700 rounded-full row justify-center items-center border-4 border-slate-300"
-              >
-                <p className="font-semibold text-4xl text-white">
-                  {pokemon?.stats.total}
-                </p>
-                <p className="absolute w-full h-full top-0 left-0 row justify-center p-4 uppercase text-white text-xs">
+              <div className="relative overflow-hidden w-48 aspect-square bg-slate-300 rounded-full row justify-center items-center border-4 border-slate-300">
+                <motion.p className="font-semibold text-4xl text-white z-10">
+                  {rounded}
+                </motion.p>
+                <p className="absolute w-full h-full top-0 left-0 row justify-center p-4 uppercase text-white text-xs z-10">
                   Power
                 </p>
+                <div className="absolute w-full h-full top-0 left-0 col justify-end">
+                  <motion.div
+                    initial={{ height: "0%" }}
+                    animate={{ height: "100%" }}
+                    transition={{ ease: [0, 0, 0, 1], duration: 0.5 }}
+                    style={{
+                      borderRadius: "100%",
+                      background:
+                        pokemonTypeColors[pokemon?.type[0] as PokemonType][0],
+                      boxShadow: "0 -16px 32px #0003 inset",
+                    }}
+                    className="w-full h-full"
+                  />
+                </div>
               </div>
             </div>
             <div className="col gap-4">

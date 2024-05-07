@@ -21,9 +21,15 @@ const PokemonEvolutionCard = ({ pokemon }: Props) => {
             Evolution Chain
           </p>
           <div className="absolute top-0 left-0 w-full h-full col">
-            {pokemonTypeColors[pokemon?.type[0] as PokemonType].map((color) => (
-              <div style={{ background: color }} className="w-full h-full" />
-            ))}
+            {pokemonTypeColors[pokemon?.type[0] as PokemonType].map(
+              (color, index) => (
+                <div
+                  key={index}
+                  style={{ background: color }}
+                  className="w-full h-full"
+                />
+              )
+            )}
           </div>
           <div
             style={{
@@ -35,9 +41,15 @@ const PokemonEvolutionCard = ({ pokemon }: Props) => {
         </h3>
       </div>
       <div className="row justify-center gap-4">
-        {pokemon?.evolution.map(({ no, method }) => (
-          <EvolutionCard key={no} no={no} method={method} />
-        ))}
+        {pokemon?.evolution.length ? (
+          pokemon?.evolution.map(({ no, method }) => (
+            <EvolutionCard key={no} no={no} method={method} />
+          ))
+        ) : (
+          <h2 className="p-16 uppercase text-4xl bg-slate-200 w-full row justify-center rounded-lg">
+            Empty Evolution Stage
+          </h2>
+        )}
       </div>
     </div>
   );

@@ -6,6 +6,7 @@ import { PokemonType } from "@/types/Pokemon";
 import PokemonTypeIcon from "@/components/PokemonTypeIcon";
 import Navigation from "@/components/Navigation";
 import pokemonLogo from "@/assets/pokemon.svg";
+import { motion } from "framer-motion";
 
 const HomePage = () => {
   const [searchParams] = useSearchParams();
@@ -59,8 +60,11 @@ const HomePage = () => {
                 : "All".toUpperCase()}
             </div>
           </h1>
-          {isLoading ? (
-            <div
+          {isLoading && (
+            <motion.div
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ ease: [0, 0, 0, 1] }}
               className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 animate-pulse"
               style={{
                 maskImage: "linear-gradient(180deg, #000, transparent)",
@@ -71,13 +75,24 @@ const HomePage = () => {
                 .map((_, index) => (
                   <PokemonCardSkeleton key={index} />
                 ))}
-            </div>
-          ) : (
-            <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2">
+            </motion.div>
+          )}
+          {!isLoading && (
+            <motion.div
+              initial="initial"
+              animate="animate"
+              variants={{
+                initial: {},
+                animate: {
+                  transition: { staggerChildren: 0.1, ease: [0, 0, 0, 1] },
+                },
+              }}
+              className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2"
+            >
               {pokemons?.map((pokemon) => (
                 <PokemonCard key={pokemon.no} pokemon={pokemon} />
               ))}
-            </div>
+            </motion.div>
           )}
         </div>
       </div>
