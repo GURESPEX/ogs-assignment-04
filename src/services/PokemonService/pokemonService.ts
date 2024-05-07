@@ -16,17 +16,13 @@ const pokemonApi = createApi({
       transformResponse: (
         response: PokemonsResponse,
         _,
-        arg: string | undefined
+        arg: PokemonType | undefined
       ) => {
         const transformedResponse = {
           ...response,
           data: {
             data: response.data.data.filter((pokemon) =>
-              arg
-                ? arg !== "all"
-                  ? pokemon.type.includes(arg as PokemonType)
-                  : true
-                : true
+              arg ? (arg !== "all" ? pokemon.type.includes(arg) : true) : true
             ),
           },
         };

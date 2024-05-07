@@ -5,15 +5,12 @@ import { MdCatchingPokemon, MdNavigateBefore } from "react-icons/md";
 import { Link, useParams } from "react-router-dom";
 import pokemonLogo from "@/assets/pokemon.svg";
 import { pokemonTypeColors } from "@/utils/PokemonTypeColors";
-import { PokemonType } from "@/types/Pokemon";
 import NotFoundPage from "./NotFoundPage";
 
 const DetailPage = () => {
   const { no } = useParams();
   const { data, isLoading } = useGetPokemonQuery(no || "");
   const pokemon = data?.data.data[0];
-
-  console.log(pokemon);
 
   return (
     <>
@@ -62,8 +59,7 @@ const DetailPage = () => {
                 style={{
                   outline: "2px solid rgba(0, 0, 0, 0.1)",
                   outlineOffset: -2,
-                  background:
-                    pokemonTypeColors[pokemon?.type[0] as PokemonType][0],
+                  background: pokemonTypeColors[pokemon?.type[0]][0],
                 }}
                 className="row items-center p-4 gap-4 rounded-b-lg"
               >

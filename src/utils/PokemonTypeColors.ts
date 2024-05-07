@@ -1,6 +1,8 @@
+import { PokemonType } from "./../types/Pokemon";
 export const pokemonTypeColors: {
-  [key: string]: string[];
+  [key in PokemonType]: string[];
 } = {
+  all: [""],
   normal: ["#A4ACAF"],
   fire: ["#FD7D24"],
   water: ["#4592C3"],

@@ -15,6 +15,7 @@ export interface PokemonResponse {
 }
 
 export type PokemonType =
+  | "all"
   | "normal"
   | "fire"
   | "water"
