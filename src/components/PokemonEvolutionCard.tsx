@@ -34,7 +34,7 @@ const PokemonEvolutionCard = ({ pokemon }: Props) => {
           />
         </h3>
       </div>
-      <div className="row">
+      <div className="row justify-center gap-4">
         {pokemon?.evolution.map(({ no, method }) => (
           <EvolutionCard key={no} no={no} method={method} />
         ))}

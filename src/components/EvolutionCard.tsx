@@ -12,7 +12,11 @@ const EvolutionCard = ({ no, method }: Props) => {
   const pokemon = data?.data.data[0];
 
   return isLoading ? (
-    <div>Loading...</div>
+    <div className="col w-[256px] h-[364px]">
+      <div className="relative col items-center justify-center h-full px-4 gap-4 rounded-lg bg-slate-200">
+        Loading...
+      </div>
+    </div>
   ) : (
     <>
       {method && (

@@ -7,7 +7,7 @@ const NotFoundPage = () => {
     <>
       <div
         style={{
-          outline: "2px solid rgba(0, 0, 0, 0.1)",
+          outline: "2px solid rgba(0, 0, 0, 0.05)",
           outlineOffset: -2,
         }}
         className="row items-center p-4 gap-4 rounded-b-lg bg-slate-200"
@@ -19,8 +19,7 @@ const NotFoundPage = () => {
           <MdNavigateBefore className="text-4xl" />
         </Link>
         <Link
-          style={{ opacity: 0.05 }}
-          className="row items-center p-4 gap-4 bg-black rounded-lg"
+          className="row items-center p-4 gap-4 bg-black bg-opacity-5 rounded-lg"
           to="/"
         >
           <img className="h-12" src={pokemonLogo} alt="Pokemon Logo" />

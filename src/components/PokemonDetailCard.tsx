@@ -2,7 +2,11 @@ import { Pokemon, PokemonType } from "@/types/Pokemon";
 import PokemonTypeIcon from "./PokemonTypeIcon";
 import StatsPipe from "./StatsPipe";
 import { Link } from "react-router-dom";
-import { MdNavigateBefore, MdNavigateNext } from "react-icons/md";
+import {
+  MdCatchingPokemon,
+  MdNavigateBefore,
+  MdNavigateNext,
+} from "react-icons/md";
 import { pokemonTypeColors } from "@/utils/PokemonTypeColors";
 
 type Props = {
@@ -38,7 +42,7 @@ const PokemonDetailCard = ({ pokemon }: Props) => {
           />
         </h3>
       </div>
-      <div className="row gap-4">
+      <div style={{ perspective: 1024 }} className="row gap-4">
         <div className="col justify-center">
           <Link
             className="rounded-full p-2 border-2 bg-white border-slate-100 hover:bg-slate-100 hover:border-slate-200 active:bg-slate-200 active:border-slate-300 transition"
@@ -47,7 +51,14 @@ const PokemonDetailCard = ({ pokemon }: Props) => {
             <MdNavigateBefore className="text-4xl" />
           </Link>
         </div>
-        <div className="col w-full rounded-lg bg-slate-200 border-2 border-slate-300">
+        <div
+          style={{
+            transformStyle: "preserve-3d",
+            transform: "rotateY(30deg)",
+            transformOrigin: "left",
+          }}
+          className="col w-full rounded-lg bg-slate-200 border-2 border-slate-300"
+        >
           <h2 className="p-4 uppercase font-semibold text-xl text-center bg-slate-300">
             Information
           </h2>
@@ -157,8 +168,18 @@ const PokemonDetailCard = ({ pokemon }: Props) => {
             src={`https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/${pokemon?.no}.png`}
             alt={pokemon?.name}
           />
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full aspect-square rounded-full row justify-center items-center">
+            <MdCatchingPokemon className="w-full h-full aspect-square text-slate-300" />
+          </div>
         </div>
-        <div className="col w-full rounded-lg bg-slate-200 border-2 border-slate-300">
+        <div
+          style={{
+            transformStyle: "preserve-3d",
+            transform: "rotateY(-30deg)",
+            transformOrigin: "right",
+          }}
+          className="col w-full rounded-lg bg-slate-200 border-2 border-slate-300"
+        >
           <h2 className="p-4 uppercase font-semibold text-xl text-center bg-slate-300">
             Stats
           </h2>
